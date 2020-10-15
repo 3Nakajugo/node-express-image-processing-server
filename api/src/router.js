@@ -30,23 +30,23 @@ const upload = multer({
 });
 
 router.post('/upload', upload.single('photo'), async (req, res) => {
-    if (req.fileValidationError) 
+    if (req.fileValidationError)
         return res.status(400).json({ error: req.fileValidationError });
-        try {
-            await imageProcessor(req.file.filename);
-        } catch {
-            
-        }
-    
+    try {
+        await imageProcessor(req.file.filename);
+    } catch {
+
+    }
+
     return res.status(201).json({ success: true });
-    
+
 }
 
 );
 
-const photoPath= path.resolve(__dirname, '../../client/photo-viewer.html');
+const photoPath = path.resolve(__dirname, '../../client/photo-viewer.html');
 
-router.get('/photo-viewer', (req, res)=>{
-res.sendFile(photoPath)
+router.get('/photo-viewer', (req, res) => {
+    res.sendFile(photoPath)
 });
 module.exports = router;
